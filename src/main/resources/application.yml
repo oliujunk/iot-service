@@ -1,0 +1,65 @@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} --- [%15.15t] %clr(%-40.40logger{39}){cyan} [%6line] : %m%n"
+  level:
+    root: info
+
+server:
+  port: 8007
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+
+  profiles:
+    active: prod
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/iot?useUnicode=true&characterEncoding=UTF-8&useSSL=true
+    username: root
+    password: 13387543885
+
+  data:
+    mongodb:
+      uri: mongodb://root:13387543885@localhost:27018/
+      database: iot
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 13387543885
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+
+
+
+sa-token:
+  token-name: token
+  token-style: uuid
+  is-concurrent: true
+  is-share: true
+  is-print: false
+  is-read-cookie: false
+
+mybatis-plus:
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+mqtt:
+  host: 127.0.0.1
+  port: 1883
+  username: admin
+  password: public
+  client-id: iot-service
